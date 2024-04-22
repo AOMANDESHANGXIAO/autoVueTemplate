@@ -1,23 +1,116 @@
 {
   "name": "autovuetemplate",
   "displayName": "autoVueTemplate",
-  "description": "enjoy",
+  "description": "",
   "version": "0.0.1",
+  "author": "RidiculousAdventurer",
+  "publisher": "RidiculousAdventurer",
+  "icon":"./logo.png",
+  "license":"MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AOMANDESHANGXIAO/autoVueTemplate.git"
+  },
   "engines": {
     "vscode": "^1.88.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [],
+  "activationEvents": [
+    "onStartupFinished"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "autovuetemplate.helloWorld",
-        "title": "Hello World"
+        "command": "autovuetemplate.vt",
+        "title": "vt"
+      },
+      {
+        "command": "autovuetemplate.quickSelector",
+        "title": "quickSelector"
       }
-    ]
+    ],
+    "keybindings": [
+      {
+        "command": "autovuetemplate.vt",
+        "key": "ctrl+shift+t",
+        "mac": "cmd+shift+t",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "autovuetemplate.quickSelector",
+        "key": "ctrl+shift+p",
+        "mac": "cmd+shift+p",
+        "when": "editorTextFocus"
+      }
+    ],
+    "configuration": {
+      "title": "Vue Component Template Generator Configurations",
+      "properties": {
+        "autoVueTemplate.auto": {
+          "type": "boolean",
+          "default": true,
+          "description": "Auto generate template when you create a new file"
+        },
+        "autoVueTemplate.allTemplates": {
+          "type": "array",
+          "default": [
+            {
+              "name": "默认vue3模板",
+              "key": "defaultVue3",
+              "extend": "",
+              "vueVersion": "3",
+              "script": {
+                "lang": "",
+                "setup": true
+              },
+              "style": {
+                "lang": "",
+                "scoped": true
+              },
+              "componentName": {
+                "isExist": true,
+                "isHump": false
+              },
+              "sequence": [
+                "script",
+                "template",
+                "style"
+              ]
+            },
+            {
+              "name": "默认vue2模板",
+              "key": "defaultVue2",
+              "extend": "",
+              "vueVersion": "2",
+              "script": {
+                "lang": ""
+              },
+              "style": {
+                "lang": "",
+                "scoped": true
+              },
+              "componentName": {
+                "isExist": true,
+                "isHump": false
+              },
+              "sequence": [
+                "template",
+                "script",
+                "style"
+              ]
+            }
+          ]
+        },
+        "autoVueTemplate.option": {
+          "type": "string",
+          "default": "default",
+          "description": "Select the template options"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "yarn run package",
@@ -31,17 +124,18 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.88.0",
     "@types/mocha": "^10.0.6",
     "@types/node": "18.x",
+    "@types/vscode": "^1.88.0",
     "@typescript-eslint/eslint-plugin": "^7.4.0",
     "@typescript-eslint/parser": "^7.4.0",
-    "eslint": "^8.57.0",
-    "typescript": "^5.3.3",
-    "ts-loader": "^9.5.1",
-    "webpack": "^5.91.0",
-    "webpack-cli": "^5.1.4",
     "@vscode/test-cli": "^0.0.8",
-    "@vscode/test-electron": "^2.3.9"
+    "@vscode/test-electron": "^2.3.9",
+    "@vscode/vsce": "^2.26.0",
+    "eslint": "^8.57.0",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.3.3",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4"
   }
 }
